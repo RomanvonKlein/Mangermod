@@ -15,6 +15,7 @@ public class MangerMod
     public void init(FMLInitializationEvent event)
     {
         // some example code
+        //MoinMoin
         System.out.println("DIRT BLOCK >> "+Blocks.DIRT.getUnlocalizedName());
     }
 }
