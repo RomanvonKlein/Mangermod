@@ -1,0 +1,10 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "manger:block_manger"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}]
+    }
+}

@@ -1,11 +1,21 @@
 [
-{
-  "modid": "manger",
-  "name": "Manger Mod",
-  "description": "Adds a manger to feed your animals!",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "https://github.com/RomanvonKlein/Mangermod",
-  "authorList": ["RomanvonKlein"],
-}
-]
+  {
+    "modid" : "manger",
+    "name" : "MangerMod",
+    "version" : "1.12.2-7.0.2",
+    "url" : "",
+    "credits" : "",
+    "authorList": [
+      "RomanvonKlein"
+    ],
+    "description": "Adds the manger to auto-feed animals",
+    "logoFile" : "",
+    "updateUrl" : "",
+    "parent" : "",
+    "screenshots": [
+    ],
+    "dependencies": [
+      "Forge"
+    ]
+  }
+  ]
