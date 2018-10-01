@@ -3,6 +3,7 @@ package com.romanvonklein.manger.util;
 import com.romanvonklein.manger.MangerMod;
 import com.romanvonklein.manger.blocks.BlockManger;
 import com.romanvonklein.manger.init.MangerBlocks;
+import com.romanvonklein.manger.tileentities.MangerTileEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @EventBusSubscriber
 public class RegistryHandler{
@@ -20,13 +22,12 @@ public class RegistryHandler{
         final Block[] blocks = {
             new BlockManger(Material.WOOD, "mangerBlock", "block_manger")
         };
-        MangerMod.logger.debug("Registering blocks in theory");
+        GameRegistry.registerTileEntity(MangerTileEntity.class, MangerMod.MODID + "_testcontainerblock");
         event.getRegistry().registerAll(blocks);
     }
     
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        MangerMod.logger.debug("Block is: " + MangerBlocks.BLOCK_MANGER);
         final Item[] items = {
                 //new ItemBasic("itemBasic", "basic_item")
         };
