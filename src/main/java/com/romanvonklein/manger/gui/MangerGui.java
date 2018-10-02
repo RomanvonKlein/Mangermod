@@ -1,6 +1,7 @@
 package com.romanvonklein.manger.gui;
 
 import com.romanvonklein.manger.MangerMod;
+import com.romanvonklein.manger.tileentities.MangerContainer;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
@@ -13,8 +14,8 @@ public class MangerGui extends GuiContainer {
 
     private static final ResourceLocation background = new ResourceLocation(MangerMod.MODID, "textures/gui/mangergui.png");
 
-    public MangerGui(Container container) {
-        super(container);
+    public MangerGui(MangerContainer mangerContainer) {
+        super(mangerContainer);
 
         xSize = WIDTH;
         ySize = HEIGHT;

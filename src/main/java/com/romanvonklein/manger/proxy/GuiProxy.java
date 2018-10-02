@@ -1,5 +1,6 @@
 package com.romanvonklein.manger.proxy;
 
+
 import com.romanvonklein.manger.gui.MangerGui;
 import com.romanvonklein.manger.tileentities.MangerContainer;
 import com.romanvonklein.manger.tileentities.MangerTileEntity;
@@ -15,9 +16,9 @@ public class GuiProxy implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
-        TileEntity te = world.getTileEntity(pos);
+        MangerTileEntity te = ((MangerTileEntity)world.getTileEntity(pos));
         if (te instanceof MangerTileEntity) {
-            return new MangerContainer(player.inventory, (MangerTileEntity) te);
+            return new MangerContainer(player.inventory, te);
         }
         return null;
     }
@@ -27,8 +28,7 @@ public class GuiProxy implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof MangerTileEntity) {
-            MangerTileEntity mangerTileEntity = (MangerTileEntity) te;
-            return new MangerGui(new MangerContainer(player.inventory, mangerTileEntity));
+            return new MangerGui(new MangerContainer(player.inventory,  (MangerTileEntity)te));
         }
         return null;
     }
