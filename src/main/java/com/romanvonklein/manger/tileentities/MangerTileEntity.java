@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -21,7 +22,7 @@ public class MangerTileEntity extends TileEntity implements ITickable {
     public static final int INV_SIZE = 5;
 
     // This item handler will hold our nine inventory slots
-    private  ItemStackHandler itemStackHandler = new MangerItemStackHandler();
+    private ItemStackHandler itemStackHandler = new MangerItemStackHandler();
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -66,26 +67,36 @@ public class MangerTileEntity extends TileEntity implements ITickable {
             List<EntityAnimal> animalsInRange = world.getEntitiesWithinAABB(EntityAnimal.class,
                     new AxisAlignedBB(this.pos.getX() - 4, this.pos.getY() - 2, this.pos.getZ() - 4,
                             this.pos.getX() + 4, this.pos.getY() + 2, this.pos.getZ() + 4));
-            HashMap<Class, Integer> have = new HashMap<>();
+            HashMap<Class<?extends EntityAnimal>, Integer> have = new HashMap<>();
+            
             for (int i = 0; i < animalsInRange.size(); i++) {
-                for(int foodSlotIndex = 0; foodSlotIndex < this.INV_SIZE; foodSlotIndex++){
-                     //TODO: check for foods here!
-                }
                 EntityAnimal animal = animalsInRange.get(i);
-                if(have.containsKey(animal.getClass())){
-                    if(have.get(animal.getClass())!=-1){
-                        if(this.itemStackHandler.)
-                        //found second of a kind - set map value to -1, remove feed and breed animals
-                        animal.setInLove(null);
-                        animalsInRange.get(have.get(animal.getClass())).setInLove(null);
-                        have.put(animal.getClass(), -1);
+                int foodSlot = -1;
+                for(int foodSlotIndex = 0; foodSlotIndex < INV_SIZE; foodSlotIndex++){
+                    ItemStack stackToTest = this.itemStackHandler.getStackInSlot(foodSlotIndex);
+                     if(animal.isBreedingItem(stackToTest) && stackToTest.getCount()>=2){
+                         foodSlot = foodSlotIndex;
+                         break;
+                     }
+                }
+                if(foodSlot != -1){
+                    if(have.containsKey(animal.getClass())){
+                        if(have.get(animal.getClass())!=-1){
+                            if(this.itemStackHandler.getStackInSlot(foodSlot).getCount()>=2){
+                                //found second of a kind - set map value to -1, remove feed and breed animals
+                                animal.setInLove(null);
+                                animalsInRange.get(have.get(animal.getClass())).setInLove(null);
+                                this.itemStackHandler.getStackInSlot(foodSlot).shrink(2);
+                                have.put(animal.getClass(), -1);
+                            }
+                        }else{
+                            //last couple has been served, save a new single into map
+                            have.put(animal.getClass(), i);
+                        }
                     }else{
-                        //last couple has been served, save a new single into map
+                        //first animal of that kind - add it to map
                         have.put(animal.getClass(), i);
                     }
-                }else{
-                    //first animal of that kind - add it to map
-                    have.put(animal.getClass(), i);
                 }
             }
         }
