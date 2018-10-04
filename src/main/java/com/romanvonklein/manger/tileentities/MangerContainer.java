@@ -1,7 +1,5 @@
 package com.romanvonklein.manger.tileentities;
 
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -20,6 +18,7 @@ public class MangerContainer extends Container{
 	private MangerTileEntity te;
 
     public MangerContainer(IInventory playerInventory, MangerTileEntity te) {
+
         this.te = te;
         addOwnSlots();
         addPlayerSlots(playerInventory);
@@ -44,16 +43,13 @@ public class MangerContainer extends Container{
     }
 
     private void addOwnSlots() {
-        System.out.println("Adding SLot!!")
         IItemHandler itemHandler = this.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         int x = 9;
         int y = 6;
 
         // Add our own slots
-        int slotIndex = 0;
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex, x, y));
-            slotIndex++;
+        for (int i = 0; i < 5; i++) {
+            addSlotToContainer(new SlotItemHandler(itemHandler, i, x, y));
             x += 18;
         }
     }

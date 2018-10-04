@@ -37,7 +37,8 @@ public class BlockManger extends Block implements ITileEntityProvider {
 
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new MangerTileEntity();
+        MangerTileEntity te = new MangerTileEntity();
+        return te;
     }
 
     @SideOnly(Side.CLIENT)
