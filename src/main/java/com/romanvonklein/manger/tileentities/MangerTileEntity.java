@@ -3,7 +3,6 @@ package com.romanvonklein.manger.tileentities;
 import java.util.HashMap;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -22,7 +23,7 @@ public class RegistryHandler{
         final Block[] blocks = {
             new BlockManger(Material.WOOD, "mangerBlock", "block_manger")
         };
-        GameRegistry.registerTileEntity(MangerTileEntity.class, MangerMod.MODID + "_testcontainerblock");
+        GameRegistry.registerTileEntity(MangerTileEntity.class, new ResourceLocation(MangerMod.MODID + "_testcontainerblock"));
         event.getRegistry().registerAll(blocks);
     }
     
